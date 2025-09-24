@@ -1,0 +1,42 @@
+# Java Study Plan
+
+This file contains a step-by-step plan to revise and practice key Java concepts for your assignment and evaluation.
+
+---
+
+## 1. Classes & Objects
+- Review class syntax, fields, and constructors
+- Practice creating objects and accessing fields/methods
+- Implement a simple class (e.g., Person or Book)
+
+## 2. Methods
+- Write methods with different access modifiers
+- Practice method overloading
+- Implement utility methods in your class
+
+## 3. Mutable & Immutable Objects
+- Review mutable vs. immutable concepts
+- Implement a mutable class (e.g., Account)
+- Implement an immutable class (e.g., Point)
+
+## 4. Getter & Setter Methods
+- Add private fields to a class
+- Write getter and setter methods
+- Practice using them to access and modify data
+
+## 5. Exception Handling
+- Review checked vs. unchecked exceptions
+- Practice try-catch-finally blocks
+- Create and use custom exception classes
+
+## 6. Stream API
+- Review basic Stream operations (filter, map, collect)
+- Practice with lists and arrays
+- Implement a few examples (e.g., filtering a list of objects)
+
+
+## Tips
+- Write small programs for each topic
+- Use comments to explain your code
+- Relate each concept to a real-world scenario
+- Review and refactor your code after each step
