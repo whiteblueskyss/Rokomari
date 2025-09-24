@@ -40,3 +40,32 @@ This file contains a step-by-step plan to revise and practice key Java concepts 
 - Use comments to explain your code
 - Relate each concept to a real-world scenario
 - Review and refactor your code after each step
+
+
+
+
+
+Note: 
+Object
+ └── Throwable
+      ├── Exception
+      │    ├── Checked Exceptions (IOException, SQLException)
+      │    └── Unchecked Exceptions (RuntimeException → NullPointerException, etc.)
+      └── Error (OutOfMemoryError, StackOverflowError)
+
+
+Throwable
+├── Error (System-level errors - not meant to be caught)
+│   ├── OutOfMemoryError
+│   ├── StackOverflowError
+│   └── VirtualMachineError
+│
+└── Exception (Application-level errors - meant to be handled)
+    ├── IOException (Checked)
+    ├── SQLException (Checked)
+    ├── ClassNotFoundException (Checked)
+    └── RuntimeException (Unchecked)
+        ├── NullPointerException
+        ├── ArithmeticException
+        ├── ArrayIndexOutOfBoundsException
+        └── IllegalArgumentException
