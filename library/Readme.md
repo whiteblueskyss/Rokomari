@@ -26,4 +26,25 @@ Created two main entities:
 
    And same for authors.
 
+   ***
+
+**Phase 2: One-to-Many Relationship**
+**Scenario:** A **Book** can have multiple **Reviews**.
+**Entities:**
+
+- Review: `id, book_id, user_id, rating, comment`
+
+**Tasks:**
+
+- Create `ReviewRepository`, service, and controller.
+- Implement API to:
+
+  - GET /api/reviews/book/{bookId} to get all reviews for a book
+  - GET /api/reviews/{id} to get a review by ID
+  - POST /api/reviews to add a new review
+  - PUT /api/reviews/{id} to update a review
+  - DELETE /api/reviews/{id} to delete a review
+
+  **Goal:** Learn how to handle **child entities** and fetch related data.
+
 ---
