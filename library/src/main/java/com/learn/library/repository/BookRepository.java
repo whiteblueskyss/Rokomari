@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.dao.EmptyResultDataAccessException; 
 
 import java.util.List;
 
@@ -32,7 +33,11 @@ public class BookRepository {
     // Find book by ID
     public Book findById(Long id) {
         String sql = "SELECT * FROM books WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, bookRowMapper);
+        try {
+            return jdbcTemplate.queryForObject(sql, new Object[]{id}, bookRowMapper);
+        } catch (EmptyResultDataAccessException e) {
+            return null; // No book found
+        }
     }
 
     // Save a new book

@@ -5,6 +5,7 @@ import com.learn.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;   
 
 import java.util.List;
 
@@ -33,14 +34,14 @@ public class BookController {
 
     // Create a new book
     @PostMapping
-    public ResponseEntity<Book> createBook(@RequestBody Book book) {
+    public ResponseEntity<Book> createBook(@Valid @RequestBody Book book) {
         Book savedBook = bookService.createBook(book);
         return ResponseEntity.status(201).body(savedBook);
     }
 
     // Update a book
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book) {
+    public ResponseEntity<Book> updateBook(@PathVariable Long id, @Valid @RequestBody Book book) {
         book.setId(id); // Ensure the ID is set
         Book updatedBook = bookService.updateBook(book);
         if (updatedBook != null) {

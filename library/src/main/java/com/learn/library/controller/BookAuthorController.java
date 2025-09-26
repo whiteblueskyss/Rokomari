@@ -5,6 +5,7 @@ import com.learn.library.service.BookAuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class BookAuthorController {
 
     // Assign an author to a book
     @PostMapping("/assign")
-    public ResponseEntity<Void> assignAuthorToBook(@RequestBody BookAuthorDTO dto) {
+    public ResponseEntity<Void> assignAuthorToBook(@Valid @RequestBody BookAuthorDTO dto) {
         bookAuthorService.assignAuthorToBook(dto);
         return ResponseEntity.status(201).build();
     }

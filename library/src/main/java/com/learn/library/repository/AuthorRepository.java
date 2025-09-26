@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired; // Autowired is u
 import org.springframework.jdbc.core.JdbcTemplate; // JdbcTemplate is a Spring class that simplifies the use of JDBC (Java Database Connectivity). It handles the creation and release of resources, which helps to avoid common errors such as forgetting to close database connections. It also provides methods for executing SQL queries, updates, and for retrieving results.  
 import org.springframework.jdbc.core.RowMapper; // RowMapper is an interface used by JdbcTemplate for mapping rows of a ResultSet on a per-row basis. It allows you to define how each row of the ResultSet should be converted into an object.
 import org.springframework.stereotype.Repository; // Repository is a Spring annotation that indicates that the class is a "Repository", which is an abstraction of data access and storage. Spring creates a bean for this class and controls its lifecycle.
+import org.springframework.dao.EmptyResultDataAccessException;
+
 
 import java.util.List;
 
@@ -31,7 +33,11 @@ public class AuthorRepository {
     // Find author by ID
     public Author findById(Long id) {
         String sql = "SELECT * FROM authors WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, authorRowMapper);
+        try {
+            return jdbcTemplate.queryForObject(sql, new Object[]{id}, authorRowMapper);
+        } catch (EmptyResultDataAccessException e) {
+            return null; // No author found
+        }
     }
 
     // Save a new author

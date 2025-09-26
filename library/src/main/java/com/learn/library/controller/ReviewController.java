@@ -5,6 +5,7 @@ import com.learn.library.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;   
 
 import java.util.List;
 
@@ -33,14 +34,14 @@ public class ReviewController {
 
     // Create a new review
     @PostMapping
-    public ResponseEntity<Review> createReview(@RequestBody Review review) {
+    public ResponseEntity<Review> createReview(@Valid @RequestBody Review review) {
         Review savedReview = reviewService.createReview(review);
         return ResponseEntity.status(201).body(savedReview);
     }
 
     // Update a review
     @PutMapping("/{id}")
-    public ResponseEntity<Review> updateReview(@PathVariable Long id, @RequestBody Review review) {
+    public ResponseEntity<Review> updateReview(@PathVariable Long id, @Valid @RequestBody Review review) {
         review.setId(id);
         Review updatedReview = reviewService.updateReview(review);
         if (updatedReview != null) {
