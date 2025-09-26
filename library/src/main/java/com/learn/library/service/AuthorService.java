@@ -3,7 +3,7 @@ package com.learn.library.service;
 import com.learn.library.model.Author;
 import com.learn.library.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service; // Service is a Spring annotation that indicates that the class is a "Service", which is a specialization of the @Component annotation. It is used to define business logic and service layer components. Spring creates a bean for this class and controls its lifecycle.
 
 import java.util.List;
 

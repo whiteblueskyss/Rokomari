@@ -1,10 +1,10 @@
 package com.learn.library.repository;
 
 import com.learn.library.model.Author;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired; // Autowired is used for automatic dependency injection. It allows Spring to resolve and inject collaborating beans into your bean.
+import org.springframework.jdbc.core.JdbcTemplate; // JdbcTemplate is a Spring class that simplifies the use of JDBC (Java Database Connectivity). It handles the creation and release of resources, which helps to avoid common errors such as forgetting to close database connections. It also provides methods for executing SQL queries, updates, and for retrieving results.  
+import org.springframework.jdbc.core.RowMapper; // RowMapper is an interface used by JdbcTemplate for mapping rows of a ResultSet on a per-row basis. It allows you to define how each row of the ResultSet should be converted into an object.
+import org.springframework.stereotype.Repository; // Repository is a Spring annotation that indicates that the class is a "Repository", which is an abstraction of data access and storage. Spring creates a bean for this class and controls its lifecycle.
 
 import java.util.List;
 

@@ -3,8 +3,8 @@ package com.learn.library.controller;
 import com.learn.library.model.Author;
 import com.learn.library.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity; // ResponseEntity represents the whole HTTP response: status code, headers, and body. It allows you to fully configure the HTTP response.
+import org.springframework.web.bind.annotation.*; // This package contains annotations for mapping web requests to specific handler classes and methods. like @RestController, @RequestMapping, @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, @PathVariable, and @RequestBody.
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class AuthorController {
 
     // Get all authors
     @GetMapping
-    public List<Author> getAllAuthors() {
+    public List<Author> getAllAuthors() { // it always returns a list, even if empty so don't need ResponseEntity. ResponseEntity is useful when you want to return different status codes or custom headers. 
         return authorService.getAllAuthors();
     }
 
@@ -46,7 +46,7 @@ public class AuthorController {
         if (updatedAuthor != null) {
             return ResponseEntity.ok(updatedAuthor);
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound().build(); //Why use .build()? Sometimes you want a response with no body (just status + headers). .build() means: “I’m done, send this response as-is.” sometimes you want to return a response with no body, just status code and headers.
     }
 
     // Delete an author
