@@ -4,6 +4,7 @@ import com.learn.library.model.Book;
 import com.learn.library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.learn.library.exception.BookNotFoundException;
 
 import java.util.List;
 
@@ -20,7 +21,11 @@ public class BookService {
 
     // Get a book by ID
     public Book getBookById(Long id) {
-        return bookRepository.findById(id);
+        Book existingBook = bookRepository.findById(id);
+        if (existingBook == null) {
+            throw new BookNotFoundException(id);
+        }
+        return existingBook;
     }
 
     // Create a new book
@@ -30,11 +35,20 @@ public class BookService {
 
     // Update a book
     public Book updateBook(Book book) {
-        return bookRepository.update(book);
+        Book existingBook = bookRepository.findById(book.getId());
+        if (existingBook == null) {
+            throw new BookNotFoundException(book.getId());
+        }
+        return bookRepository.update(book); // now safe
     }
 
     // Delete a book by ID
     public void deleteBook(Long id) {
-        bookRepository.deleteById(id);
+        Book existingBook = bookRepository.findById(id);
+        if (existingBook == null) {
+            throw new BookNotFoundException(id);
+        }
+        bookRepository.deleteById(id); // now safe
     }
+
 }

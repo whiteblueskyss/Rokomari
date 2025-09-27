@@ -29,7 +29,11 @@ public class ReviewService {
 
     // Get a single review by ID
     public Review getReviewById(Long id) {
-        return reviewRepository.findById(id);
+        Review existingReview = reviewRepository.findById(id);
+        if (existingReview == null) {
+            throw new InvalidReviewException("Invalid review ID: " + id);
+        }
+        return existingReview;
     }
 
     // Create a new review
@@ -45,6 +49,10 @@ public class ReviewService {
 
     // Update a review
     public Review updateReview(Review review) {
+        Review existingReview = reviewRepository.findById(review.getId());
+        if (existingReview == null) {
+            throw new InvalidReviewException("Invalid review ID: " + review.getId());
+        }
         if (review.getRating() < 1 || review.getRating() > 5) {
             throw new InvalidReviewException("Rating must be between 1 and 5");
         }
@@ -53,6 +61,10 @@ public class ReviewService {
 
     // Delete a review
     public void deleteReview(Long id) {
+        Review existingReview = reviewRepository.findById(id);
+        if (existingReview == null) {
+            throw new InvalidReviewException("Invalid review ID: " + id);
+        }
         reviewRepository.deleteById(id);
     }
 
