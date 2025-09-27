@@ -1,10 +1,10 @@
 package com.learn.library.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.http.HttpStatus; // HttpStatus is an enumeration in Spring Framework that represents HTTP status codes. It provides a convenient way to work with standard HTTP status codes in your application.
+import org.springframework.http.ResponseEntity; // ResponseEntity is a class in Spring Framework that represents an HTTP response, including status code, headers, and body. It is used to send responses from RESTful web services. 
+import org.springframework.web.bind.MethodArgumentNotValidException; // MethodArgumentNotValidException is an exception thrown when validation on an argument annotated with @Valid fails. It is commonly used in Spring MVC applications to handle validation errors for request bodies.
+import org.springframework.web.bind.annotation.ExceptionHandler; // ExceptionHandler is an annotation in Spring Framework that is used to define a method as an exception handler. It allows you to specify which exceptions the method should handle and how to handle them, providing a way to centralize exception handling logic in your application.
+import org.springframework.web.bind.annotation.ControllerAdvice; // ControllerAdvice is an annotation in Spring Framework that allows you to define global exception handling and other cross-cutting concerns for multiple controllers. It is used to create a centralized place for handling exceptions, applying common logic, and customizing responses across different controller classes.
 
 import java.util.HashMap;
 import java.util.Map;
