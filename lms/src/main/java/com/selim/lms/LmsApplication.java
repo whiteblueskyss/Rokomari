@@ -1,4 +1,4 @@
-package com.selim.LMS;
+package com.selim.lms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

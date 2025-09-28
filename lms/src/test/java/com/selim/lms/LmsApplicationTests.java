@@ -1,4 +1,4 @@
-package com.selim.LMS;
+package com.selim.lms;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
