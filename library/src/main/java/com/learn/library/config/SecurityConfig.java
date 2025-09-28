@@ -1,15 +1,15 @@
 package com.learn.library.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.http.HttpMethod;
+import org.springframework.context.annotation.Bean; // this import is for @Bean annotation. It indicates that a method produces a bean to be managed by the Spring container. 
+import org.springframework.context.annotation.Configuration; // this import is for @Configuration annotation. It indicates that the class has @Bean definition methods. 
+import org.springframework.security.config.annotation.web.builders.HttpSecurity; // this import is for HttpSecurity class. It allows configuring web based security for specific http requests.  
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; // this import is for BCryptPasswordEncoder class. It is used to hash passwords using the BCrypt strong hashing function.
+import org.springframework.security.crypto.password.PasswordEncoder; // this import is for PasswordEncoder interface. It is used to perform password encoding and matching.
+import org.springframework.security.provisioning.InMemoryUserDetailsManager; // this import is for InMemoryUserDetailsManager class. It is an implementation of UserDetailsService that stores user details in memory.
+import org.springframework.security.core.userdetails.User; // this import is for User class. It is a core user information implementation that is used by UserDetailsService.
+import org.springframework.security.core.userdetails.UserDetails; // this import is for UserDetails interface. It provides core user information.
+import org.springframework.security.web.SecurityFilterChain; // this import is for SecurityFilterChain interface. It is used to configure the security filter chain.
+import org.springframework.http.HttpMethod; // this import is for HttpMethod enum. It represents HTTP methods such as GET, POST, PUT, DELETE, etc.
 
 @Configuration
 public class SecurityConfig {

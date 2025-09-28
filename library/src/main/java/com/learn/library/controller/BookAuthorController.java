@@ -16,6 +16,15 @@ public class BookAuthorController {
     @Autowired
     private BookAuthorService bookAuthorService;
 
+    // private final BookAuthorService bookAuthorService;
+
+    // @Autowired
+    // public BookAuthorController(BookAuthorService bookAuthorService) {
+    //     this.bookAuthorService = bookAuthorService;
+    // }
+
+    // If you modified something here, then it will not effect in different places because of private.
+
     // Assign an author to a book
     @PostMapping("/assign")
     public ResponseEntity<Void> assignAuthorToBook(@Valid @RequestBody BookAuthorDTO dto) {
