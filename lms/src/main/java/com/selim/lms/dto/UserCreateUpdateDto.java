@@ -6,16 +6,16 @@ import jakarta.validation.constraints.Size;
 
 public class UserCreateUpdateDto {
 
-    @NotBlank
-    @Size(max = 100)
+    @NotBlank(message = "Name is required")
+    @Size(max = 100, message = "Name should not exceed 100 characters")
     private String name;
 
-    @NotBlank
-    @Email
-    @Size(max = 120)
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email should be valid")
+    @Size(max = 120, message = "Email should not exceed 120 characters")
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "Role is required")
     private String role;
 
     public UserCreateUpdateDto() {}
