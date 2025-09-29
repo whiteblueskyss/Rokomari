@@ -1,19 +1,19 @@
 package com.selim.lms.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 
 public class ReviewCreateUpdateDto {
 
-    // Phase 1: caller supplies userId.
-    // Phase 2: we'll take it from auth principal and drop this field from create.
-    @NotNull
+    @NotNull(message = "User ID is required and cannot be null")
+    @Positive(message = "User ID must be a positive number")
     private Long userId;
 
-    @NotNull
+    @NotNull(message = "Book ID is required and cannot be null")
+    @Positive(message = "Book ID must be a positive number")
     private Long bookId;
 
-    @NotBlank
+    @NotBlank(message = "Review text is required and cannot be blank")
+    @Size(min = 10, max = 2000, message = "Review must be between 10 and 2000 characters")
     private String review;
 
     public ReviewCreateUpdateDto() {}
@@ -25,10 +25,11 @@ public class ReviewCreateUpdateDto {
     }
 
     public Long getUserId() { return userId; }
-    public Long getBookId() { return bookId; }
-    public String getReview() { return review; }
-
     public void setUserId(Long userId) { this.userId = userId; }
+
+    public Long getBookId() { return bookId; }
     public void setBookId(Long bookId) { this.bookId = bookId; }
-    public void setReview(String review) { this.review = review; }
+
+    public String getReview() { return review; }
+    public void setReview(String review) { this.review = review != null ? review.trim() : null; }
 }

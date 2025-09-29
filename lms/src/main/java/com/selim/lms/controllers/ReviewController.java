@@ -4,13 +4,16 @@ import com.selim.lms.dto.ReviewCreateUpdateDto;
 import com.selim.lms.dto.ReviewDto;
 import com.selim.lms.services.ReviewService;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/reviews")
+@Validated
 public class ReviewController {
 
     private final ReviewService reviewService;
@@ -26,7 +29,7 @@ public class ReviewController {
     }
 
     @GetMapping("/{id}")
-    public ReviewDto getById(@PathVariable Long id) {
+    public ReviewDto getById(@PathVariable @Positive(message = "Review ID must be a positive number") Long id) {
         return reviewService.getById(id);
     }
 
@@ -36,23 +39,27 @@ public class ReviewController {
     }
 
     @GetMapping("/book/{bookId}")
-    public List<ReviewDto> getByBook(@PathVariable Long bookId) {
+    public List<ReviewDto> getByBook(
+            @PathVariable @Positive(message = "Book ID must be a positive number") Long bookId) {
         return reviewService.getByBook(bookId);
     }
 
     @GetMapping("/user/{userId}")
-    public List<ReviewDto> getByUser(@PathVariable Long userId) {
+    public List<ReviewDto> getByUser(
+            @PathVariable @Positive(message = "User ID must be a positive number") Long userId) {
         return reviewService.getByUser(userId);
     }
 
     @PutMapping("/{id}")
-    public ReviewDto update(@PathVariable Long id, @RequestBody @Valid ReviewCreateUpdateDto dto) {
+    public ReviewDto update(
+            @PathVariable @Positive(message = "Review ID must be a positive number") Long id, 
+            @RequestBody @Valid ReviewCreateUpdateDto dto) {
         return reviewService.update(id, dto);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable @Positive(message = "Review ID must be a positive number") Long id) {
         reviewService.delete(id);
     }
 }
