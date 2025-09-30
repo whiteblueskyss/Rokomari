@@ -10,7 +10,7 @@
 
 A **complete backend API** for a Library Management System built with Spring Boot. This project demonstrates comprehensive REST API development with proper database design, exception handling, validation, and relationship management.
 
-## 🎯 Learning Objectives Achieved
+##  Learning Objectives Achieved
 
 - **REST API Design**: Built comprehensive CRUD operations following REST principles
 - **Database Integration**: Used JdbcTemplate for efficient database operations
@@ -19,7 +19,7 @@ A **complete backend API** for a Library Management System built with Spring Boo
 - **Data Validation**: Implemented input validation using Jakarta validation
 - **Security Configuration**: Basic security setup for API protection
 
-## 🏗️ System Architecture
+##  System Architecture
 
 ### **Core Entities**
 
@@ -84,9 +84,9 @@ src/main/java/com/learn/library/
     └── InvalidReviewException.java # Custom review exception
 ```
 
-## 📚 Complete API Documentation
+##  Complete API Documentation
 
-### **📖 Book Management APIs**
+### **Book Management APIs**
 
 | Method | Endpoint | Description | Request Body | Response |
 |--------|----------|-------------|--------------|----------|
@@ -96,7 +96,7 @@ src/main/java/com/learn/library/
 | `PUT` | `/api/books/{id}` | Update book | `Book JSON` | `Book` or `404` |
 | `DELETE` | `/api/books/{id}` | Delete book | None | `204` or `404` |
 
-### **👨‍💼 Author Management APIs**
+### **Author Management APIs**
 
 | Method | Endpoint | Description | Request Body | Response |
 |--------|----------|-------------|--------------|----------|
@@ -106,7 +106,7 @@ src/main/java/com/learn/library/
 | `PUT` | `/api/authors/{id}` | Update author | `Author JSON` | `Author` or `404` |
 | `DELETE` | `/api/authors/{id}` | Delete author | None | `204` or `404` |
 
-### **⭐ Review Management APIs**
+### **Review Management APIs**
 
 | Method | Endpoint | Description | Request Body | Response |
 |--------|----------|-------------|--------------|----------|
@@ -116,7 +116,7 @@ src/main/java/com/learn/library/
 | `PUT` | `/api/reviews/{id}` | Update review | `Review JSON` | `Review` or `404` |
 | `DELETE` | `/api/reviews/{id}` | Delete review | None | `204` or `404` |
 
-### **🔗 Book-Author Relationship APIs**
+### **Book-Author Relationship APIs**
 
 | Method | Endpoint | Description | Request Body | Response |
 |--------|----------|-------------|--------------|----------|
@@ -125,7 +125,7 @@ src/main/java/com/learn/library/
 | `GET` | `/api/book-author/book/{bookId}` | Get authors of a book | None | `List<Long>` |
 | `GET` | `/api/book-author/author/{authorId}` | Get books by author | None | `List<Long>` |
 
-## 🔧 Technical Implementation Details
+## Technical Implementation Details
 
 ### **Data Access Layer (JdbcTemplate)**
 - **SQL Operations**: Custom SQL queries.
@@ -153,16 +153,8 @@ src/main/java/com/learn/library/
 - **Many-to-Many**: Books ↔ Authors relationship
 - **Junction Table**: Proper many-to-many implementation
 
-### **2. Data Transfer Objects (DTOs)**
-- **BookAuthorDTO**: Clean data transfer for relationship operations
-- **Separation of Concerns**: API models separate from database entities
 
-### **3. Service Layer Architecture**
-- **Business Logic Separation**: Clear separation from controllers
-- **Reusable Components**: Service methods for complex operations
-- **Transaction Management**: Proper business transaction boundaries
-
-### **4. Exception Handling Strategy**
+### **2. Exception Handling Strategy**
 - **Custom Exception Types**: `BookNotFoundException`, `AuthorNotFoundException`, `InvalidReviewException`
 - **Global Handler**: `@ControllerAdvice` for centralized exception management
 - **Validation Errors**: Proper handling of validation failures
@@ -181,7 +173,7 @@ book_author (book_id, author_id) -- Junction table
 - **Books ← Reviews**: One-to-Many (One book can have multiple reviews)
 - **Books ↔ Authors**: Many-to-Many (Books can have multiple authors, authors can write multiple books)
 
-## 🧪 Testing & Validation
+## Testing & Validation
 
 ### **API Testing**
 - **Postman Collection**: Complete API testing suite
@@ -194,7 +186,7 @@ book_author (book_id, author_id) -- Junction table
 - **Business Rules**: Rating constraints (1-5), title requirements
 - **Error Responses**: Proper validation error messages
 
-## 🎓 Key Learning Outcomes
+## Key Learning Outcomes
 
 ### **Spring Boot**
 - **Application Structure**: Proper layered architecture implementation
@@ -211,12 +203,8 @@ book_author (book_id, author_id) -- Junction table
 - **API Design**: RESTful resource design and URL patterns
 - **Error Handling**: Comprehensive exception management strategy
 
-### **Software Engineering Practices**
-- **Code Organization**: Clean package structure and separation of concerns
-- **Documentation**: Comprehensive code comments and API documentation
-- **Validation**: Input validation and error handling best practices
 
-## 🔮 Technical Achievements
+## Technical Achievements
 
 -  **Complete CRUD Operations** for all entities
 -  **Complex Relationship Management** (One-to-Many, Many-to-Many)
@@ -224,7 +212,6 @@ book_author (book_id, author_id) -- Junction table
 -  **Input Validation** with meaningful error messages
 -  **Security Configuration** for API protection
 -  **Clean Architecture** with proper layer separation
--  **Production-Ready Code** with comprehensive error handling
 
 ---
 
