@@ -12,7 +12,7 @@
 
 A **Library Management System** built with Spring Boot, featuring advanced authentication, role-based authorization, comprehensive REST APIs, and production-ready database management. This project demonstrates learning of modern Java backend development with industry-standard practices.
 
-## 🎯 Key Learning Achievements
+## Key Learning Achievements
 
 - **Advanced Spring Boot Architecture**: Layered architecture with proper separation of concerns
 - **JPA/Hibernate**: Complex entity relationships with lazy loading optimization  
@@ -22,7 +22,7 @@ A **Library Management System** built with Spring Boot, featuring advanced authe
 - **Global Exception Handling**: Comprehensive error management with custom exceptions
 - **Production Database**: PostgreSQL integration with proper indexing strategies
 
-## 🏗️ System Architecture
+## System Architecture
 
 ### **Technology Stack**
 - **Framework**: Spring Boot 3.5.6 with Java 21
@@ -74,7 +74,7 @@ src/main/java/com/selim/lms/
     └── AuthUtil.java             # Authentication utility methods
 ```
 
-## 📊 Database Schema & Relationships
+## Database Schema & Relationships
 
 ### **Entity Relationship Diagram**
 ```sql
@@ -136,7 +136,7 @@ CREATE INDEX idx_book_title ON books(title);
 CREATE INDEX idx_author_name ON authors(name);
 ```
 
-## 🔐 Authentication & Authorization System
+## Authentication & Authorization System
 
 ### **JWT Implementation**
 - **Token Generation**
@@ -154,54 +154,54 @@ CREATE INDEX idx_author_name ON authors(name);
 - **Token Validation**: Comprehensive token verification
 
 
-## 📋 Complete API Documentation
+## Complete API Documentation
 
-### **🔑 Authentication Endpoints**
+### **Authentication Endpoints**
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/auth/login` | User login with JWT |
+| Method | Endpoint | Description | Request Body | Response |
+|--------|----------|-------------|-------------|----------|
+| `POST` | `/api/auth/login` | User login with JWT | LoginRequest JSON | JWT token + user info |
 
-### **👥 User Management APIs**
+### **User Management APIs**
 
-| Method | Endpoint | Description | Authorization |
-|--------|----------|-------------|---------------|
-| `POST` | `/api/users` | Create new user | None |
-| `GET` | `/api/users` | Get all users | None |
-| `GET` | `/api/users/{id}` | Get user by ID | None |
-| `PUT` | `/api/users/{id}` | Update user | None |
-| `DELETE` | `/api/users/{id}` | Delete user | None |
+| Method | Endpoint | Description | Authorization | Request Body | Response |
+|--------|----------|-------------|---------------|-------------|----------|
+| `POST` | `/api/users` | Create new user | None | UserCreateUpdateDto JSON | User object |
+| `GET` | `/api/users` | Get all users | None | None | List<User> |
+| `GET` | `/api/users/{id}` | Get user by ID | None | None | User object |
+| `PUT` | `/api/users/{id}` | Update user | None | UserCreateUpdateDto JSON | User object |
+| `DELETE` | `/api/users/{id}` | Delete user | None | None | Status code 204 |
 
-### **📚 Book Management APIs**
+### **Book Management APIs**
 
-| Method | Endpoint | Description | Authorization |
-|--------|----------|-------------|---------------|
-| `POST` | `/api/books` | Create new book | ADMIN only |
-| `GET` | `/api/books` | Get all books | None |
-| `GET` | `/api/books/{id}` | Get book by ID | None |
-| `PUT` | `/api/books/{id}` | Update book | ADMIN only |
-| `DELETE` | `/api/books/{id}` | Delete book | ADMIN only |
+| Method | Endpoint | Description | Authorization | Request Body | Response |
+|--------|----------|-------------|---------------|-------------|----------|
+| `POST` | `/api/books` | Create new book | ADMIN only | BookCreateUpdateDto JSON | Book object |
+| `GET` | `/api/books` | Get all books | None | None | List<Book> |
+| `GET` | `/api/books/{id}` | Get book by ID | None | None | Book object |
+| `PUT` | `/api/books/{id}` | Update book | ADMIN only | BookCreateUpdateDto JSON | Book object |
+| `DELETE` | `/api/books/{id}` | Delete book | ADMIN only | None | Status code 204 |
 
-### **👨‍💼 Author Management APIs**
+### **Author Management APIs**
 
-| Method | Endpoint | Description | Authorization |
-|--------|----------|-------------|---------------|
-| `POST` | `/api/authors` | Create new author | ADMIN only |
-| `GET` | `/api/authors` | Get all authors | None |
-| `GET` | `/api/authors/{id}` | Get author by ID | None |
-| `PUT` | `/api/authors/{id}` | Update author | ADMIN only |
-| `DELETE` | `/api/authors/{id}` | Delete author | ADMIN only |
+| Method | Endpoint | Description | Authorization | Request Body | Response |
+|--------|----------|-------------|---------------|-------------|----------|
+| `POST` | `/api/authors` | Create new author | ADMIN only | AuthorCreateUpdateDto JSON | Author object |
+| `GET` | `/api/authors` | Get all authors | None | None | List<Author> |
+| `GET` | `/api/authors/{id}` | Get author by ID | None | None | Author object |
+| `PUT` | `/api/authors/{id}` | Update author | ADMIN only | AuthorCreateUpdateDto JSON | Author object |
+| `DELETE` | `/api/authors/{id}` | Delete author | ADMIN only | None | Status code 204 |
 
-### **⭐ Review Management APIs**
+### **Review Management APIs**
 
-| Method | Endpoint | Description | Authorization |
-|--------|----------|-------------|---------------|
-| `POST` | `/api/reviews` | Create new review | Authenticated |
-| `GET` | `/api/reviews` | Get all reviews | None |
-| `GET` | `/api/reviews/{id}` | Get review by ID | None |
-| `GET` | `/api/reviews/book/{bookId}` | Get reviews by book | None |
-| `PUT` | `/api/reviews/{id}` | Update review | Owner/ADMIN |
-| `DELETE` | `/api/reviews/{id}` | Delete review | Owner/ADMIN |
+| Method | Endpoint | Description | Authorization | Request Body | Response |
+|--------|----------|-------------|---------------|-------------|----------|
+| `POST` | `/api/reviews` | Create new review | Authenticated | ReviewCreateUpdateDto JSON | Review object |
+| `GET` | `/api/reviews` | Get all reviews | None | None | List<Review> |
+| `GET` | `/api/reviews/{id}` | Get review by ID | None | None | Review object |
+| `GET` | `/api/reviews/book/{bookId}` | Get reviews by book | None | None | List<Review> |
+| `PUT` | `/api/reviews/{id}` | Update review | Owner/ADMIN | ReviewCreateUpdateDto JSON | Review object |
+| `DELETE` | `/api/reviews/{id}` | Delete review | Owner/ADMIN | None | Status code 204 |
 
 
 ### **4. Database Migration Management**
@@ -212,19 +212,15 @@ CREATE INDEX idx_author_name ON authors(name);
 -- Environment-specific migrations
 ```
 
-## 📈 Performance & Optimization
+## Performance & Optimization
 
 ### **Database Optimization**
 - **Lazy Loading**: Optimized entity relationships to prevent N+1 queries
-- **Connection Pooling**: HikariCP for efficient database connections
-- **Query Optimization**: Custom JPQL queries for complex operations
 - **Indexing Strategy**: Strategic indexes on frequently queried columns
 
 ### **API Performance**
 - **DTO Conversion**: Efficient entity-to-DTO mapping
 - **Response Optimization**: Minimal data transfer with focused DTOs
-- **Caching Strategy**: Ready for Redis/Hazelcast integration
-- **Pagination Support**: Scalable data retrieval patterns
 
 ### **Exception Management**
 - **Custom Exception Hierarchy**: Domain-specific exception types
@@ -233,4 +229,4 @@ CREATE INDEX idx_author_name ON authors(name);
 - **HTTP Status Code Accuracy**: Proper REST status code usage
 ---
 
-*This Library Management System demonstrates enterprise-level proficiency in Spring Boot development, showcasing advanced authentication, complex database relationships, and production-ready architectural patterns suitable for large-scale applications.*
+*This Library Management System demonstrates  learning in Spring Boot development, showcasing authentication, complex database relationships, and good architectural patterns.*
