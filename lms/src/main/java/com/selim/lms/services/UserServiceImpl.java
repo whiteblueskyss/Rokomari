@@ -134,4 +134,12 @@ public class UserServiceImpl implements UserService {
     private UserDto mapToDto(User user) {
         return new UserDto(user.getId(), user.getName(), user.getEmail(), user.getRole().name());
     }
+
+     @Override
+    public boolean authenticateUserById(Long userId) {
+        // Check if the user exists by user ID
+        User user = userRepository.findById(userId).orElse(null);
+        return user != null;  // If the user exists, return true
+    }
+
 }

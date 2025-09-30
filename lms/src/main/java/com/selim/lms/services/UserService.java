@@ -7,8 +7,14 @@ import java.util.List;
 
 public interface UserService {
     UserDto create(UserCreateUpdateDto dto);
+    
     UserDto getById(Long id);
+    
     List<UserDto> getAll();
+    
     UserDto update(Long id, UserCreateUpdateDto dto);
+    
     void delete(Long id);
+
+    boolean authenticateUserById(Long userId); 
 }

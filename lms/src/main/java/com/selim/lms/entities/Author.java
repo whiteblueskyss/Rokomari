@@ -1,6 +1,6 @@
 package com.selim.lms.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.*;  //Enables annotations like @Entity, @Id, @Column, etc., to map Java classes to database tables. Provides interfaces for managing entities, queries, and transactions (e.g., EntityManager, Query). Supports persistence operations such as saving, updating, and deleting objects in a database.
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
