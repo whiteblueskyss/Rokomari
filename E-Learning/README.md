@@ -1,6 +1,24 @@
+
+
 # E-Learning API
 
 A simple Spring Boot REST API for an E-Learning platform with MySQL database.
+
+## Project Background
+
+This is my **first attempt** at building a complete Spring Boot REST API project. While the core functionality has been implemented, the project is **not fully complete** due to technical challenges encountered during development.
+
+### Known Issues
+- **Nested JSON Response Problem**: GET methods return deeply nested JSON structures in Postman, making the API responses difficult to consume
+- **API Response Format**: Need to implement proper DTOs (Data Transfer Objects) to control response structure
+
+### Learning Experience
+This project served as a valuable learning experience in:
+- Spring Boot application structure and configuration
+- JPA entity relationships and their complexities
+- REST API design challenges
+- Database integration with MySQL
+- Understanding the importance of proper response formatting in API design
 
 ## Features
 
