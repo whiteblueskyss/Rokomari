@@ -45,6 +45,8 @@ public class Author {
         book.getAuthors().remove(this);
     }
 
+    // By default, Java compares objects by reference. In JPA, entities are considered equal if their primary keys (id) are equal, even if they are different instances. Here comparing is handled by id.
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

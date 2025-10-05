@@ -34,7 +34,7 @@ public class AuthorServiceImpl implements AuthorService {
 
         Author author = new Author(dto.getName());
         Author saved = authorRepository.save(author);
-        return mapToDto(saved);
+        return mapToDto(saved); // Convert entity to DTO for response
     }
 
     @Override

@@ -44,6 +44,7 @@
     </dependency>
 
     <!-- Spring Data JPA (Hibernate ORM) -->
+	<!-- For easy database access and interaction. Mapping Java objects to database tables. Transactions are managed automatically. -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -70,17 +71,27 @@
     </dependency>
 
     <!-- JWT dependencies (without Spring Security) -->
-    <dependency>
+    
+	<!-- Contains the core interfaces and classes for working with JWTs (e.g., creating, parsing, validating tokens).
+	You need this for any JWT operations in your code.-->
+	
+	<dependency>
         <groupId>io.jsonwebtoken</groupId>
         <artifactId>jjwt-api</artifactId>
         <version>0.12.3</version>
     </dependency>
+
+	<!-- Provides the actual implementation of the interfaces defined in jjwt-api.
+	Marked as runtime because you only need it when running your application, not when compiling (the API is enough for compilation). -->
     <dependency>
         <groupId>io.jsonwebtoken</groupId>
         <artifactId>jjwt-impl</artifactId>
         <version>0.12.3</version>
         <scope>runtime</scope>
     </dependency>
+
+	<!-- Integrates Jackson for JSON serialization/deserialization.
+Required if you want to use JWTs with custom claims or objects, as it handles converting Java objects to JSON and vice versa. -->
     <dependency>
         <groupId>io.jsonwebtoken</groupId>
         <artifactId>jjwt-jackson</artifactId>
