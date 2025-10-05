@@ -158,9 +158,15 @@ CREATE INDEX idx_author_name ON authors(name);
 
 ### **Authentication Endpoints**
 
-| Method | Endpoint | Description | Request Body | Response |
-|--------|----------|-------------|-------------|----------|
-| `POST` | `/api/auth/login` | User login with JWT | LoginRequest JSON | JWT token + user info |
+| Method | Endpoint | Description | Authorization | Request Body | Response |
+|--------|----------|-------------|---------------|-------------|----------|
+| `POST` | `/api/auth/login` | User login with JWT | Public | LoginRequest JSON | JWT token + user info |
+| `POST` | `/api/auth/logout` | User logout (clears JWT cookie) | Admin/Reader | None | Success message |
+| `GET` | `/api/auth/me` | Get current user profile | Admin/Reader | None | Current user info |
+| `GET` | `/api/auth/validate` | Validate JWT token | Public | None | Token validation result |
+| `GET` | `/api/auth/admin-only` | Admin-only test endpoint | Admin only | None | Admin welcome message |
+| `GET` | `/api/auth/reader-only` | Reader-only test endpoint | Reader only | None | Reader welcome message |
+| `GET` | `/api/auth/any-authenticated` | Any authenticated user endpoint | Admin/Reader | None | Welcome message |
 
 ### **User Management APIs**
 
@@ -204,13 +210,7 @@ CREATE INDEX idx_author_name ON authors(name);
 | `DELETE` | `/api/reviews/{id}` | Delete review | Owner/ADMIN | None | Status code 204 |
 
 
-### **4. Database Migration Management**
-```sql
--- Flyway migration: V1__init.sql
--- Versioned schema evolution
--- Rollback capabilities
--- Environment-specific migrations
-```
+
 
 ## Performance & Optimization
 
