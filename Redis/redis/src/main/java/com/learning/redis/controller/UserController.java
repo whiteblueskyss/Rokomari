@@ -25,8 +25,12 @@ public class UserController {
 
     // Retrieve user by ID
     @GetMapping("/{id}")
-    public User getUser(@PathVariable String id) {
-        return userRepository.getUserById(id);
+    public String getUser(@PathVariable String id) {
+        User user = userRepository.getUserById(id);
+        if (user == null) {
+            return "User not found or has expired!";
+        }
+        return "User retrieved: " + user.getId() + " " +   user.getName();
     }
 
     // Delete user by ID
