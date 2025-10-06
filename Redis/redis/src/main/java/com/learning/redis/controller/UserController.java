@@ -4,6 +4,7 @@ import com.learning.redis.model.User;
 import com.learning.redis.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -20,7 +21,8 @@ public class UserController {
     @PostMapping
     public String createUser(@RequestBody User user) {
         userRepository.saveUser(user);
-        return "User created successfully!";
+        userRepository.addUserToList(user);  // Add user to the Redis List
+        return "User created and added to list!";
     }
 
     // Retrieve user by ID
@@ -31,6 +33,12 @@ public class UserController {
             return "User not found or has expired!";
         }
         return "User retrieved: " + user.getId() + " " +   user.getName();
+    }
+
+      // Retrieve all users from the Redis List
+    @GetMapping("/list")
+    public List<User> getAllUsers() {
+        return userRepository.getAllUsersFromList();  // Retrieve all users from the list
     }
 
     // Delete user by ID
