@@ -28,9 +28,10 @@ public class UserRepository {
         return redisTemplate.opsForValue().get(id);  // Retrieving user using the ID
     }
 
-    // Delete user by ID from Redis
+     // Delete user by ID from Redis
     public void deleteUser(String id) {
         redisTemplate.delete(id);  // Deleting the user with the provided ID
+        
     }
 
       // Add user to Redis List (e.g., store all users created today)
@@ -41,5 +42,17 @@ public class UserRepository {
     // Retrieve all users from the Redis List
     public List<User> getAllUsersFromList() {
         return redisTemplate.opsForList().range("userList", 0, -1);  // Retrieve all users in the list
+    }
+
+
+    public void removeExpiredUsersFromList() {
+        List<User> users = redisTemplate.opsForList().range("userList", 0, -1);  // Get all users from the list
+
+        // Remove expired users from the list
+        for (User user : users) {
+            if (redisTemplate.opsForValue().get(user.getId()) == null) {  // Check if user is expired
+                redisTemplate.opsForList().remove("userList", 1, user);  // Remove expired user from the list
+            }
+        }
     }
 }

@@ -35,10 +35,11 @@ public class UserController {
         return "User retrieved: " + user.getId() + " " +   user.getName();
     }
 
-      // Retrieve all users from the Redis List
+    // Retrieve all users from the Redis List
     @GetMapping("/list")
-    public List<User> getAllUsers() {
-        return userRepository.getAllUsersFromList();  // Retrieve all users from the list
+    public List<User> getAllUsersFromList() {
+        userRepository.removeExpiredUsersFromList(); // Clean up expired users first
+        return userRepository.getAllUsersFromList();
     }
 
     // Delete user by ID
