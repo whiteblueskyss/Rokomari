@@ -4,6 +4,8 @@ import com.learn.rediss.model.VoteRequest;
 import com.learn.rediss.service.PollService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("/poll")
 public class PollController {
@@ -26,5 +28,11 @@ public class PollController {
     @GetMapping("/vote/{option}")
     public String getVoteCount(@PathVariable String option) {
         return "Vote count for " + option + ": " + pollService.getVoteCount(option);
+    }
+
+    // Get the leaderboard (top N options)
+    @GetMapping("/leaderboard")
+    public Set<String> getLeaderboard(@RequestParam(defaultValue = "5") int topN) {
+        return pollService.getLeaderboard(topN);
     }
 }
