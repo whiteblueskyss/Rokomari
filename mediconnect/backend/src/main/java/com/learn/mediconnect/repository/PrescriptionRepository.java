@@ -14,12 +14,6 @@ import java.util.Optional;
 @Repository
 public interface PrescriptionRepository extends JpaRepository<Prescription, Long> {
 
-    // Use inherited findAll() instead of custom findAllPrescriptions()
-
-    List<Prescription> findAll();
-
-    Prescription findById(long id);
-
     List<Prescription> findByPatientId(Long patientId);
 
     List<Prescription> findByDoctorId(Long doctorId);

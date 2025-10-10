@@ -13,10 +13,6 @@ import java.util.Optional;
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
-    List<Doctor> findAll();
-
-    Doctor findById(long id);
-
     boolean existsByEmail(String email);
 
     boolean existsByUsername(String username);

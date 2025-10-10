@@ -13,10 +13,6 @@ import java.util.Optional;
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
 
-    List<Patient> findAll();
- 
-    Patient findById(long id);
- 
     boolean existsByEmail(String email);
 
     boolean existsByUsername(String username);

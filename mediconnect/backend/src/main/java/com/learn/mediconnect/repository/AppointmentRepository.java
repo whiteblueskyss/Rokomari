@@ -15,13 +15,9 @@ import java.util.Optional;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
-    List<Appointment> findAll();
-
     List<Appointment> findByDoctorId(Long doctorId);
 
     List<Appointment> findByPatientId(Long patientId);
-
-    List<Appointment> findByStatus(AppointmentStatus status);
 
     List<Appointment> findByDoctorIdAndStatus(Long doctorId, AppointmentStatus status);
 
