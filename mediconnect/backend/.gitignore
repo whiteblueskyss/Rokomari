@@ -1,0 +1,128 @@
+# Compiled class files
+*.class
+
+# Log files
+*.log
+logs/
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+# Environment variables (NEVER COMMIT THESE)
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.staging
+application-local.properties
+application-*.properties
+!application.properties
+!application-dev.properties
+!application-prod.properties
+!application-test.properties
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+h2/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Application specific
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# Spring Boot
+spring-boot-*.log
+application.pid
+
+# JaCoCo Code Coverage
+jacoco*.exec
+target/site/jacoco/
+
+# Node.js (for potential frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+!gradle-wrapper.jar
+!maven-wrapper.jar
+
+# Unit test reports
+TEST*.xml
+
+# Generated documentation
+docs/generated/
+api-docs/
