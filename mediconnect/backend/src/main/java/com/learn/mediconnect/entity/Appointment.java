@@ -33,6 +33,9 @@ public class Appointment {
     @Column(name = "visiting_date", nullable = false)
     private LocalDate visitingDate;
 
+    @Column(name = "visiting_serial_number", nullable = false)
+    private Integer visitingSerialNumber;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private AppointmentStatus status = AppointmentStatus.SCHEDULED;
@@ -70,6 +73,7 @@ public class Appointment {
         this.bookingDate = bookingDate;
         this.visitingDate = visitingDate;
         this.status = AppointmentStatus.SCHEDULED;
+        // visitingSerialNumber will be set by service layer
     }
 
     public Appointment(Doctor doctor, Patient patient, LocalDate bookingDate, LocalDate visitingDate, String problemDescription) {
@@ -79,6 +83,7 @@ public class Appointment {
         this.visitingDate = visitingDate;
         this.problemDescription = problemDescription;
         this.status = AppointmentStatus.SCHEDULED;
+        // visitingSerialNumber will be set by service layer
     }
 
     // Getters and Setters
@@ -120,6 +125,14 @@ public class Appointment {
 
     public void setVisitingDate(LocalDate visitingDate) {
         this.visitingDate = visitingDate;
+    }
+
+    public Integer getVisitingSerialNumber() {
+        return visitingSerialNumber;
+    }
+
+    public void setVisitingSerialNumber(Integer visitingSerialNumber) {
+        this.visitingSerialNumber = visitingSerialNumber;
     }
 
     public AppointmentStatus getStatus() {
@@ -171,6 +184,7 @@ public class Appointment {
                 ", patientId=" + (patient != null ? patient.getId() : null) +
                 ", bookingDate=" + bookingDate +
                 ", visitingDate=" + visitingDate +
+                ", visitingSerialNumber=" + visitingSerialNumber +
                 ", status=" + status +
                 ", problemDescription='" + problemDescription + '\'' +
                 '}';

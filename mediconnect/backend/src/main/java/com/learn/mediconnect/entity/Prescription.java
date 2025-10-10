@@ -10,10 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Prescription Entity - Represents prescriptions issued by doctors to patients
- * Maps to the 'prescriptions' table in PostgreSQL database
- */
+
 @Entity
 @Table(name = "prescriptions")
 public class Prescription {
