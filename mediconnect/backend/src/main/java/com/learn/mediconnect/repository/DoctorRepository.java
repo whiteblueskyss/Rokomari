@@ -13,9 +13,9 @@ import java.util.Optional;
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
-    List<Doctor> findAllDoctors();
+    List<Doctor> findAll();
 
-    Doctor findDoctorById(Long id);
+    Doctor findById(long id);
 
     boolean existsByEmail(String email);
 

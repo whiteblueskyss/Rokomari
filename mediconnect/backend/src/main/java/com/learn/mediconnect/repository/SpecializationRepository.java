@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface SpecializationRepository extends JpaRepository<Specialization, Long> {
 
-    List<Specialization> findAllSpecializations();
+    List<Specialization> findAll();
 
     boolean existsByName(String name);
 
