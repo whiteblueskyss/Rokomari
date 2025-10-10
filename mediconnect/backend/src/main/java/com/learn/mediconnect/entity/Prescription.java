@@ -6,7 +6,7 @@ import jakarta.validation.constraints.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +24,7 @@ public class Prescription {
 
     @NotNull(message = "Date of writing prescription is required")
     @Column(name = "prescription_date", nullable = false)
-    private LocalDateTime prescriptionDate;
+    private LocalDate prescriptionDate;
 
     @NotNull(message = "Patient is required")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -63,7 +63,7 @@ public class Prescription {
     private String other;
 
     @Column(name = "follow_up_date")
-    private LocalDateTime followUpDate;
+    private LocalDate followUpDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
@@ -99,11 +99,11 @@ public class Prescription {
         this.patient = patient;
         this.doctor = doctor;
         this.problem = problem;
-        this.prescriptionDate = LocalDateTime.now();
+        this.prescriptionDate = LocalDate.now();
         this.status = PrescriptionStatus.ACTIVE;
     }
 
-    public Prescription(Patient patient, Doctor doctor, String problem, LocalDateTime prescriptionDate) {
+    public Prescription(Patient patient, Doctor doctor, String problem, LocalDate prescriptionDate) {
         this.patient = patient;
         this.doctor = doctor;
         this.problem = problem;
@@ -120,11 +120,11 @@ public class Prescription {
         this.id = id;
     }
 
-    public LocalDateTime getPrescriptionDate() {
+    public LocalDate getPrescriptionDate() {
         return prescriptionDate;
     }
 
-    public void setPrescriptionDate(LocalDateTime prescriptionDate) {
+    public void setPrescriptionDate(LocalDate prescriptionDate) {
         this.prescriptionDate = prescriptionDate;
     }
 
@@ -200,11 +200,11 @@ public class Prescription {
         this.other = other;
     }
 
-    public LocalDateTime getFollowUpDate() {
+    public LocalDate getFollowUpDate() {
         return followUpDate;
     }
 
-    public void setFollowUpDate(LocalDateTime followUpDate) {
+    public void setFollowUpDate(LocalDate followUpDate) {
         this.followUpDate = followUpDate;
     }
 

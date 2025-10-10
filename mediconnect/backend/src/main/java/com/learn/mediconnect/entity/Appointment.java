@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 @Entity
@@ -25,13 +25,13 @@ public class Appointment {
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
-    @NotNull(message = "Booking time is required")
-    @Column(name = "booking_time", nullable = false)
-    private LocalDateTime bookingTime;
+    @NotNull(message = "Booking date is required")
+    @Column(name = "booking_date", nullable = false)
+    private LocalDate bookingDate;
 
-    @NotNull(message = "Visiting time is required")
-    @Column(name = "visiting_time", nullable = false)
-    private LocalDateTime visitingTime;
+    @NotNull(message = "Visiting date is required")
+    @Column(name = "visiting_date", nullable = false)
+    private LocalDate visitingDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
@@ -64,19 +64,19 @@ public class Appointment {
     // Constructors
     public Appointment() {}
 
-    public Appointment(Doctor doctor, Patient patient, LocalDateTime bookingTime, LocalDateTime visitingTime) {
+    public Appointment(Doctor doctor, Patient patient, LocalDate bookingDate, LocalDate visitingDate) {
         this.doctor = doctor;
         this.patient = patient;
-        this.bookingTime = bookingTime;
-        this.visitingTime = visitingTime;
+        this.bookingDate = bookingDate;
+        this.visitingDate = visitingDate;
         this.status = AppointmentStatus.SCHEDULED;
     }
 
-    public Appointment(Doctor doctor, Patient patient, LocalDateTime bookingTime, LocalDateTime visitingTime, String problemDescription) {
+    public Appointment(Doctor doctor, Patient patient, LocalDate bookingDate, LocalDate visitingDate, String problemDescription) {
         this.doctor = doctor;
         this.patient = patient;
-        this.bookingTime = bookingTime;
-        this.visitingTime = visitingTime;
+        this.bookingDate = bookingDate;
+        this.visitingDate = visitingDate;
         this.problemDescription = problemDescription;
         this.status = AppointmentStatus.SCHEDULED;
     }
@@ -106,20 +106,20 @@ public class Appointment {
         this.patient = patient;
     }
 
-    public LocalDateTime getBookingTime() {
-        return bookingTime;
+    public LocalDate getBookingDate() {
+        return bookingDate;
     }
 
-    public void setBookingTime(LocalDateTime bookingTime) {
-        this.bookingTime = bookingTime;
+    public void setBookingDate(LocalDate bookingDate) {
+        this.bookingDate = bookingDate;
     }
 
-    public LocalDateTime getVisitingTime() {
-        return visitingTime;
+    public LocalDate getVisitingDate() {
+        return visitingDate;
     }
 
-    public void setVisitingTime(LocalDateTime visitingTime) {
-        this.visitingTime = visitingTime;
+    public void setVisitingDate(LocalDate visitingDate) {
+        this.visitingDate = visitingDate;
     }
 
     public AppointmentStatus getStatus() {
@@ -169,8 +169,8 @@ public class Appointment {
                 "id=" + id +
                 ", doctorId=" + (doctor != null ? doctor.getId() : null) +
                 ", patientId=" + (patient != null ? patient.getId() : null) +
-                ", bookingTime=" + bookingTime +
-                ", visitingTime=" + visitingTime +
+                ", bookingDate=" + bookingDate +
+                ", visitingDate=" + visitingDate +
                 ", status=" + status +
                 ", problemDescription='" + problemDescription + '\'' +
                 '}';
