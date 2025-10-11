@@ -1,7 +1,6 @@
 package com.learn.mediconnect.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -19,21 +18,17 @@ public class Prescription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Date of writing prescription is required")
     @Column(name = "prescription_date", nullable = false)
     private LocalDate prescriptionDate;
 
-    @NotNull(message = "Patient is required")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
-    @NotNull(message = "Doctor is required")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 
-    @NotBlank(message = "Problem description is required")
     @Column(name = "problem", columnDefinition = "TEXT", nullable = false)
     private String problem;
 

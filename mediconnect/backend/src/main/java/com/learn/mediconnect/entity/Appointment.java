@@ -1,8 +1,6 @@
 package com.learn.mediconnect.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-
 
 import java.time.LocalDate;
 
@@ -15,21 +13,17 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Doctor is required")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 
-    @NotNull(message = "Patient is required")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
-    @NotNull(message = "Booking date is required")
     @Column(name = "booking_date", nullable = false)
     private LocalDate bookingDate;
 
-    @NotNull(message = "Visiting date is required")
     @Column(name = "visiting_date", nullable = false)
     private LocalDate visitingDate;
 

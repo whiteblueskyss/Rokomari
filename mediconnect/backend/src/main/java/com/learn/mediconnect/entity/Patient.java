@@ -1,7 +1,6 @@
 package com.learn.mediconnect.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 
 import java.util.List;
 
@@ -14,39 +13,27 @@ public class Patient {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotBlank(message = "Patient name is required")
-    @Size(max = 255, message = "Name cannot exceed 255 characters")
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Please provide a valid email address")
-    @Size(max = 255, message = "Email cannot exceed 255 characters")
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Size(max = 20, message = "Phone number cannot exceed 20 characters")
     @Column(name = "phone")
     private String phone;
 
-    @NotBlank(message = "Username is required")
-    @Size(min = 3, max = 255, message = "Username must be between 3 and 255 characters")
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @NotBlank(message = "Password is required")
-    @Size(min = 6, message = "Password must be at least 6 characters")
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Size(max = 255, message = "Picture URL cannot exceed 255 characters")
     @Column(name = "pic")
     private String pic;
 
     @Column(name = "age")
     private Integer age;
 
-    @Size(max = 10, message = "Gender cannot exceed 10 characters")
     @Column(name = "gender")
     private String gender;
 

@@ -1,7 +1,6 @@
 package com.learn.mediconnect.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 
 import java.util.List;
 
@@ -14,8 +13,6 @@ public class Specialization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Specialization name is required")
-    @Size(max = 255, message = "Name cannot exceed 255 characters")
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
