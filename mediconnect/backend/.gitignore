@@ -126,3 +126,9 @@ TEST*.xml
 # Generated documentation
 docs/generated/
 api-docs/
+
+
+
+Note.txt
+
+MediConnect_Postman_Collection.json

@@ -65,15 +65,18 @@ public class PrescriptionService {
 
     @Transactional(readOnly = true)
     public Prescription getPrescriptionById(Long id) {
-        return prescriptionRepository.findById(id)
+        Prescription prescription = prescriptionRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Prescription not found with ID: " + id));
+        initializePrescriptionRelationships(prescription);
+        return prescription;
     }
 
 
 
     @Transactional(readOnly = true)
     public List<Prescription> getAllPrescriptions() {
-        return prescriptionRepository.findAll();
+        List<Prescription> prescriptions = prescriptionRepository.findAll();
+        return initializePrescriptionRelationships(prescriptions);
     }
 
 
@@ -89,7 +92,8 @@ public class PrescriptionService {
     public List<Prescription> getPrescriptionsByPatientId(Long patientId) {
         // Verify patient exists
         patientService.getPatientById(patientId);
-        return prescriptionRepository.findByPatientId(patientId);
+        List<Prescription> prescriptions = prescriptionRepository.findByPatientId(patientId);
+        return initializePrescriptionRelationships(prescriptions);
     }
 
 
@@ -98,7 +102,8 @@ public class PrescriptionService {
     public List<Prescription> getPrescriptionsByDoctorId(Long doctorId) {
         // Verify doctor exists
         doctorService.getDoctorById(doctorId);
-        return prescriptionRepository.findByDoctorId(doctorId);
+        List<Prescription> prescriptions = prescriptionRepository.findByDoctorId(doctorId);
+        return initializePrescriptionRelationships(prescriptions);
     }
 
 
@@ -108,7 +113,8 @@ public class PrescriptionService {
         // Verify patient and doctor exist
         patientService.getPatientById(patientId);
         doctorService.getDoctorById(doctorId);
-        return prescriptionRepository.findByPatientIdAndDoctorId(patientId, doctorId);
+        List<Prescription> prescriptions = prescriptionRepository.findByPatientIdAndDoctorId(patientId, doctorId);
+        return initializePrescriptionRelationships(prescriptions);
     }
 
 
@@ -173,5 +179,20 @@ public class PrescriptionService {
             updatedPrescription.getFollowUpDate().isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("Follow-up date must be today or in the future");
         }
+    }
+
+    // Helper method to initialize lazy relationships
+    private List<Prescription> initializePrescriptionRelationships(List<Prescription> prescriptions) {
+        for (Prescription prescription : prescriptions) {
+            initializePrescriptionRelationships(prescription);
+        }
+        return prescriptions;
+    }
+
+    // Helper method to initialize lazy relationships for a single prescription
+    private void initializePrescriptionRelationships(Prescription prescription) {
+        // Force initialization of lazy relationships
+        prescription.getDoctor().getName(); // Initialize doctor
+        prescription.getPatient().getName(); // Initialize patient
     }
 }

@@ -12,6 +12,7 @@ public class DoctorDTO {
     @Email(message = "Please provide a valid email address")
     private String email;
     
+    @Pattern(regexp = "^[+]?[0-9\\-\\s]+$", message = "Phone number format invalid")
     private String phone;
     
     @NotBlank(message = "Username is required")

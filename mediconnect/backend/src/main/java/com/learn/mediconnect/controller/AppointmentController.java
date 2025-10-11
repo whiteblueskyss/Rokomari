@@ -8,8 +8,11 @@ import com.learn.mediconnect.entity.Patient;
 import com.learn.mediconnect.service.AppointmentService;
 import com.learn.mediconnect.service.DoctorService;
 import com.learn.mediconnect.service.PatientService;
+import com.learn.mediconnect.validation.CreateValidation;
+import com.learn.mediconnect.validation.UpdateValidation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +40,7 @@ public class AppointmentController {
     }
 
     @PostMapping
-    public ResponseEntity<AppointmentDTO> createAppointment(@Valid @RequestBody AppointmentDTO appointmentDTO) {
+    public ResponseEntity<AppointmentDTO> createAppointment(@Validated(CreateValidation.class) @RequestBody AppointmentDTO appointmentDTO) {
         Appointment appointment = convertToEntity(appointmentDTO);
         Appointment createdAppointment = appointmentService.createAppointment(appointment);
         AppointmentDTO responseDTO = convertToDTO(createdAppointment);
@@ -61,7 +64,7 @@ public class AppointmentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AppointmentDTO> updateAppointment(@PathVariable Long id, @Valid @RequestBody AppointmentDTO appointmentDTO) {
+    public ResponseEntity<AppointmentDTO> updateAppointment(@PathVariable Long id, @Validated(UpdateValidation.class) @RequestBody AppointmentDTO appointmentDTO) {
         Appointment appointment = convertToEntity(appointmentDTO);
         Appointment updatedAppointment = appointmentService.updateAppointment(id, appointment);
         AppointmentDTO responseDTO = convertToDTO(updatedAppointment);

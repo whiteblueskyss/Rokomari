@@ -1,5 +1,6 @@
 package com.learn.mediconnect.dto;
 
+import com.learn.mediconnect.validation.CreateValidation;
 import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -8,11 +9,11 @@ public class PrescriptionDTO {
     private Long id;
     private LocalDate prescriptionDate; // Set automatically
     
-    @NotNull(message = "Patient ID is required")
+    @NotNull(message = "Patient ID is required", groups = CreateValidation.class)
     private Long patientId;
     private String patientName; // For read operations
     
-    @NotNull(message = "Doctor ID is required")
+    @NotNull(message = "Doctor ID is required", groups = CreateValidation.class)
     private Long doctorId;
     private String doctorName; // For read operations
     

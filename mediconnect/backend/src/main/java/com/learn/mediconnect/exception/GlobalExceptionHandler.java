@@ -53,15 +53,35 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
         String message = "Data integrity violation occurred";
         
+        // Log the full exception for debugging
+        System.err.println("DataIntegrityViolationException: " + ex.getMessage());
+        if (ex.getCause() != null) {
+            System.err.println("Caused by: " + ex.getCause().getMessage());
+        }
+        
         // Extract meaningful message from the exception
-        if (ex.getMessage().contains("unique constraint") || ex.getMessage().contains("duplicate key")) {
-            if (ex.getMessage().contains("email")) {
+        String fullMessage = ex.getMessage() != null ? ex.getMessage().toLowerCase() : "";
+        if (ex.getCause() != null && ex.getCause().getMessage() != null) {
+            fullMessage += " " + ex.getCause().getMessage().toLowerCase();
+        }
+        
+        if (fullMessage.contains("unique constraint") || fullMessage.contains("duplicate key")) {
+            if (fullMessage.contains("email")) {
                 message = "Email address already exists";
-            } else if (ex.getMessage().contains("username")) {
+            } else if (fullMessage.contains("username")) {
                 message = "Username already exists";
+            } else if (fullMessage.contains("uk_") || fullMessage.contains("unique")) {
+                message = "Duplicate entry found - this value already exists";
             } else {
                 message = "Duplicate entry found";
             }
+        } else if (fullMessage.contains("foreign key") || fullMessage.contains("fk_")) {
+            message = "Cannot perform operation - referenced data does not exist";
+        } else if (fullMessage.contains("not null") || fullMessage.contains("null value")) {
+            message = "Required field cannot be empty";
+        } else {
+            // Include more details for debugging
+            message = "Data integrity violation: " + (ex.getMessage() != null ? ex.getMessage() : "Unknown constraint violation");
         }
 
         ErrorResponse errorResponse = new ErrorResponse(

@@ -8,8 +8,11 @@ import com.learn.mediconnect.entity.Patient;
 import com.learn.mediconnect.service.PrescriptionService;
 import com.learn.mediconnect.service.DoctorService;
 import com.learn.mediconnect.service.PatientService;
+import com.learn.mediconnect.validation.CreateValidation;
+import com.learn.mediconnect.validation.UpdateValidation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +39,7 @@ public class PrescriptionController {
     }
 
     @PostMapping
-    public ResponseEntity<PrescriptionDTO> createPrescription(@Valid @RequestBody PrescriptionDTO prescriptionDTO) {
+    public ResponseEntity<PrescriptionDTO> createPrescription(@Validated(CreateValidation.class) @RequestBody PrescriptionDTO prescriptionDTO) {
         Prescription prescription = convertToEntity(prescriptionDTO);
         Prescription createdPrescription = prescriptionService.createPrescription(prescription);
         PrescriptionDTO responseDTO = convertToDTO(createdPrescription);
@@ -60,7 +63,7 @@ public class PrescriptionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PrescriptionDTO> updatePrescription(@PathVariable Long id, @Valid @RequestBody PrescriptionDTO prescriptionDTO) {
+    public ResponseEntity<PrescriptionDTO> updatePrescription(@PathVariable Long id, @Validated(UpdateValidation.class) @RequestBody PrescriptionDTO prescriptionDTO) {
         Prescription prescription = convertToEntity(prescriptionDTO);
         Prescription updatedPrescription = prescriptionService.updatePrescription(id, prescription);
         PrescriptionDTO responseDTO = convertToDTO(updatedPrescription);

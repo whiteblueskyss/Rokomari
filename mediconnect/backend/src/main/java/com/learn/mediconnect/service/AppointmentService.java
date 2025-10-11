@@ -62,13 +62,16 @@ public class AppointmentService {
 
     @Transactional(readOnly = true)
     public Appointment getAppointmentById(Long id) {
-        return appointmentRepository.findById(id)
+        Appointment appointment = appointmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Appointment not found with ID: " + id));
+        initializeAppointmentRelationships(appointment);
+        return appointment;
     }
 
     @Transactional(readOnly = true)
     public List<Appointment> getAllAppointments() {
-        return appointmentRepository.findAll();
+        List<Appointment> appointments = appointmentRepository.findAll();
+        return initializeAppointmentRelationships(appointments);
     }
 
     public void deleteAppointment(Long id) {
@@ -114,7 +117,8 @@ public class AppointmentService {
     public List<Appointment> getAppointmentsByDoctorId(Long doctorId) {
         // Verify doctor exists
         doctorService.getDoctorById(doctorId);
-        return appointmentRepository.findByDoctorId(doctorId);
+        List<Appointment> appointments = appointmentRepository.findByDoctorId(doctorId);
+        return initializeAppointmentRelationships(appointments);
     }
 
     
@@ -122,7 +126,8 @@ public class AppointmentService {
     public List<Appointment> getAppointmentsByPatientId(Long patientId) {
         // Verify patient exists
         patientService.getPatientById(patientId);
-        return appointmentRepository.findByPatientId(patientId);
+        List<Appointment> appointments = appointmentRepository.findByPatientId(patientId);
+        return initializeAppointmentRelationships(appointments);
     }
 
     
@@ -130,14 +135,18 @@ public class AppointmentService {
     public List<Appointment> getAppointmentsByDoctorAndStatus(Long doctorId, AppointmentStatus status) {
         // Verify doctor exists
         doctorService.getDoctorById(doctorId);
-        return appointmentRepository.findByDoctorIdAndStatus(doctorId, status);
+        List<Appointment> appointments = appointmentRepository.findByDoctorIdAndStatus(doctorId, status);
+        appointments.forEach(this::initializeAppointmentRelationships);
+        return appointments;
     }
 
     @Transactional(readOnly = true)
     public List<Appointment> getAppointmentsByPatientAndStatus(Long patientId, AppointmentStatus status) {
         // Verify patient exists
         patientService.getPatientById(patientId);
-        return appointmentRepository.findByPatientIdAndStatus(patientId, status);
+        List<Appointment> appointments = appointmentRepository.findByPatientIdAndStatus(patientId, status);
+        appointments.forEach(this::initializeAppointmentRelationships);
+        return appointments;
     }
 
     @Transactional(readOnly = true)
@@ -145,14 +154,16 @@ public class AppointmentService {
         // Verify doctor exists
         doctorService.getDoctorById(doctorId);
         
-        return appointmentRepository.findByDoctorIdAndVisitingDate(doctorId, date);
+        List<Appointment> appointments = appointmentRepository.findByDoctorIdAndVisitingDate(doctorId, date);
+        return initializeAppointmentRelationships(appointments);
     }
 
     @Transactional(readOnly = true)
     public List<Appointment> getUpcomingAppointmentsByDoctor(Long doctorId) {
         // Verify doctor exists
         doctorService.getDoctorById(doctorId);
-        return appointmentRepository.findUpcomingAppointmentsByDoctor(doctorId, LocalDate.now());
+        List<Appointment> appointments = appointmentRepository.findUpcomingAppointmentsByDoctor(doctorId, LocalDate.now());
+        return initializeAppointmentRelationships(appointments);
     }
 
     
@@ -160,7 +171,8 @@ public class AppointmentService {
     public List<Appointment> getUpcomingAppointmentsByPatient(Long patientId) {
         // Verify patient exists
         patientService.getPatientById(patientId);
-        return appointmentRepository.findUpcomingAppointmentsByPatient(patientId, LocalDate.now());
+        List<Appointment> appointments = appointmentRepository.findUpcomingAppointmentsByPatient(patientId, LocalDate.now());
+        return initializeAppointmentRelationships(appointments);
     }
 
     
@@ -188,7 +200,8 @@ public class AppointmentService {
         // Verify doctor exists
         doctorService.getDoctorById(doctorId);
         
-        return appointmentRepository.findByDoctorIdAndVisitingDateOrderByVisitingSerialNumberAsc(doctorId, visitingDate);
+        List<Appointment> appointments = appointmentRepository.findByDoctorIdAndVisitingDateOrderByVisitingSerialNumberAsc(doctorId, visitingDate);
+        return initializeAppointmentRelationships(appointments);
     }
 
     
@@ -243,5 +256,20 @@ public class AppointmentService {
                 throw new IllegalArgumentException("New visiting date must be today or in the future");
             }
         }
+    }
+    
+    // Helper method to initialize lazy relationships
+    private List<Appointment> initializeAppointmentRelationships(List<Appointment> appointments) {
+        for (Appointment appointment : appointments) {
+            initializeAppointmentRelationships(appointment);
+        }
+        return appointments;
+    }
+
+    // Helper method to initialize lazy relationships for a single appointment
+    private void initializeAppointmentRelationships(Appointment appointment) {
+        // Force initialization of lazy relationships
+        appointment.getDoctor().getName(); // Initialize doctor
+        appointment.getPatient().getName(); // Initialize patient
     }
 }
