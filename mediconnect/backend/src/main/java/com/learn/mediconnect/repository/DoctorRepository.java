@@ -17,6 +17,10 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     boolean existsByUsername(String username);
     
+    Doctor findByEmail(String email);
+    
+    Doctor findByUsername(String username);
+    
     // Find doctors by specialization
     @Query("SELECT d FROM Doctor d WHERE LOWER(d.specializations) = LOWER(:specialization)")
     List<Doctor> findBySpecialization(@Param("specialization") String specialization);

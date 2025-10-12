@@ -18,7 +18,9 @@ public class PatientDTO {
     @NotBlank(message = "Username is required")
     private String username;
     
-    // Password is optional - only included for create/update operations
+    // Password is required for registration
+    @NotBlank(message = "Password is required")
+    @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
     
     private String pic;
