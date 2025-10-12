@@ -29,15 +29,31 @@ public class PatientService {
         Patient existingPatient = getPatientById(id);
         validatePatientForUpdate(existingPatient, updatedPatient);
         
-        // Update fields
-        existingPatient.setName(updatedPatient.getName());
-        existingPatient.setEmail(updatedPatient.getEmail());
-        existingPatient.setPhone(updatedPatient.getPhone());
-        existingPatient.setUsername(updatedPatient.getUsername());
-        existingPatient.setPic(updatedPatient.getPic());
-        existingPatient.setAge(updatedPatient.getAge());
-        existingPatient.setGender(updatedPatient.getGender());
-        existingPatient.setAddress(updatedPatient.getAddress());
+        // Update fields only if they are provided (not null)
+        if (updatedPatient.getName() != null && !updatedPatient.getName().trim().isEmpty()) {
+            existingPatient.setName(updatedPatient.getName());
+        }
+        if (updatedPatient.getEmail() != null && !updatedPatient.getEmail().trim().isEmpty()) {
+            existingPatient.setEmail(updatedPatient.getEmail());
+        }
+        if (updatedPatient.getPhone() != null && !updatedPatient.getPhone().trim().isEmpty()) {
+            existingPatient.setPhone(updatedPatient.getPhone());
+        }
+        if (updatedPatient.getUsername() != null && !updatedPatient.getUsername().trim().isEmpty()) {
+            existingPatient.setUsername(updatedPatient.getUsername());
+        }
+        if (updatedPatient.getPic() != null && !updatedPatient.getPic().trim().isEmpty()) {
+            existingPatient.setPic(updatedPatient.getPic());
+        }
+        if (updatedPatient.getAge() != null) {
+            existingPatient.setAge(updatedPatient.getAge());
+        }
+        if (updatedPatient.getGender() != null && !updatedPatient.getGender().trim().isEmpty()) {
+            existingPatient.setGender(updatedPatient.getGender());
+        }
+        if (updatedPatient.getAddress() != null && !updatedPatient.getAddress().trim().isEmpty()) {
+            existingPatient.setAddress(updatedPatient.getAddress());
+        }
         
         // Only update password if provided
         if (updatedPatient.getPassword() != null && !updatedPatient.getPassword().trim().isEmpty()) {
@@ -125,26 +141,16 @@ public class PatientService {
             throw new IllegalArgumentException("Updated patient data cannot be null");
         }
         
-        if (updatedPatient.getName() == null || updatedPatient.getName().trim().isEmpty()) {
-            throw new IllegalArgumentException("Patient name is required");
-        }
-        
-        if (updatedPatient.getEmail() == null || updatedPatient.getEmail().trim().isEmpty()) {
-            throw new IllegalArgumentException("Email is required");
-        }
-        
-        if (updatedPatient.getUsername() == null || updatedPatient.getUsername().trim().isEmpty()) {
-            throw new IllegalArgumentException("Username is required");
-        }
-        
-        // Check for duplicate email (excluding current patient)
-        if (!existingPatient.getEmail().equals(updatedPatient.getEmail()) && 
+        // Check for duplicate email only if email is being updated
+        if (updatedPatient.getEmail() != null && !updatedPatient.getEmail().trim().isEmpty() &&
+            !existingPatient.getEmail().equals(updatedPatient.getEmail()) && 
             patientRepository.existsByEmail(updatedPatient.getEmail())) {
             throw new IllegalArgumentException("Patient with this email already exists");
         }
         
-        // Check for duplicate username (excluding current patient)
-        if (!existingPatient.getUsername().equals(updatedPatient.getUsername()) && 
+        // Check for duplicate username only if username is being updated
+        if (updatedPatient.getUsername() != null && !updatedPatient.getUsername().trim().isEmpty() &&
+            !existingPatient.getUsername().equals(updatedPatient.getUsername()) && 
             patientRepository.existsByUsername(updatedPatient.getUsername())) {
             throw new IllegalArgumentException("Patient with this username already exists");
         }

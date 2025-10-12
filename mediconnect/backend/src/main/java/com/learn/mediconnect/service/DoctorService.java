@@ -31,14 +31,28 @@ public class DoctorService {
         Doctor existingDoctor = getDoctorById(id);
         validateDoctorForUpdate(existingDoctor, updatedDoctor);
         
-        // Update fields
-        existingDoctor.setName(updatedDoctor.getName());
-        existingDoctor.setEmail(updatedDoctor.getEmail());
-        existingDoctor.setUsername(updatedDoctor.getUsername());
-        existingDoctor.setPassword(updatedDoctor.getPassword());
-        existingDoctor.setPhone(updatedDoctor.getPhone());
-        existingDoctor.setSpecializations(updatedDoctor.getSpecializations());
-        existingDoctor.setVisitingDays(updatedDoctor.getVisitingDays());
+        // Update fields only if they are provided (not null)
+        if (updatedDoctor.getName() != null && !updatedDoctor.getName().trim().isEmpty()) {
+            existingDoctor.setName(updatedDoctor.getName());
+        }
+        if (updatedDoctor.getEmail() != null && !updatedDoctor.getEmail().trim().isEmpty()) {
+            existingDoctor.setEmail(updatedDoctor.getEmail());
+        }
+        if (updatedDoctor.getUsername() != null && !updatedDoctor.getUsername().trim().isEmpty()) {
+            existingDoctor.setUsername(updatedDoctor.getUsername());
+        }
+        if (updatedDoctor.getPassword() != null && !updatedDoctor.getPassword().trim().isEmpty()) {
+            existingDoctor.setPassword(updatedDoctor.getPassword());
+        }
+        if (updatedDoctor.getPhone() != null && !updatedDoctor.getPhone().trim().isEmpty()) {
+            existingDoctor.setPhone(updatedDoctor.getPhone());
+        }
+        if (updatedDoctor.getSpecializations() != null && !updatedDoctor.getSpecializations().trim().isEmpty()) {
+            existingDoctor.setSpecializations(updatedDoctor.getSpecializations());
+        }
+        if (updatedDoctor.getVisitingDays() != null && !updatedDoctor.getVisitingDays().trim().isEmpty()) {
+            existingDoctor.setVisitingDays(updatedDoctor.getVisitingDays());
+        }
         
         return doctorRepository.save(existingDoctor);
     }
@@ -133,26 +147,16 @@ public class DoctorService {
             throw new IllegalArgumentException("Updated doctor data cannot be null");
         }
         
-        if (updatedDoctor.getName() == null || updatedDoctor.getName().trim().isEmpty()) {
-            throw new IllegalArgumentException("Doctor name is required");
-        }
-        
-        if (updatedDoctor.getEmail() == null || updatedDoctor.getEmail().trim().isEmpty()) {
-            throw new IllegalArgumentException("Email is required");
-        }
-        
-        if (updatedDoctor.getUsername() == null || updatedDoctor.getUsername().trim().isEmpty()) {
-            throw new IllegalArgumentException("Username is required");
-        }
-        
-        // Check for duplicate email (excluding current doctor)
-        if (!existingDoctor.getEmail().equals(updatedDoctor.getEmail()) && 
+        // Check for duplicate email only if email is being updated
+        if (updatedDoctor.getEmail() != null && !updatedDoctor.getEmail().trim().isEmpty() &&
+            !existingDoctor.getEmail().equals(updatedDoctor.getEmail()) && 
             doctorRepository.existsByEmail(updatedDoctor.getEmail())) {
             throw new IllegalArgumentException("Doctor with this email already exists");
         }
         
-        // Check for duplicate username (excluding current doctor)
-        if (!existingDoctor.getUsername().equals(updatedDoctor.getUsername()) && 
+        // Check for duplicate username only if username is being updated
+        if (updatedDoctor.getUsername() != null && !updatedDoctor.getUsername().trim().isEmpty() &&
+            !existingDoctor.getUsername().equals(updatedDoctor.getUsername()) && 
             doctorRepository.existsByUsername(updatedDoctor.getUsername())) {
             throw new IllegalArgumentException("Doctor with this username already exists");
         }

@@ -1,28 +1,29 @@
 package com.learn.mediconnect.dto;
 
 import jakarta.validation.constraints.*;
+import com.learn.mediconnect.validation.CreateValidation;
 
 public class DoctorDTO {
 
     private Long id;
     
-    @NotBlank(message = "Doctor name is required")
+    @NotBlank(message = "Doctor name is required", groups = CreateValidation.class)
     private String name;
     
-    @NotBlank(message = "Email is required")
+    @NotBlank(message = "Email is required", groups = CreateValidation.class)
     @Email(message = "Please provide a valid email address")
     private String email;
     
     @Pattern(regexp = "^[+]?[0-9\\-\\s]+$", message = "Phone number format invalid")
     private String phone;
     
-    @NotBlank(message = "Username is required")
+    @NotBlank(message = "Username is required", groups = CreateValidation.class)
     private String username;
     
     // Password is optional - only included for create/update operations
     private String password;
     
-    @NotBlank(message = "Specialization is required")
+    @NotBlank(message = "Specialization is required", groups = CreateValidation.class)
     private String specializations;
     
     private String visitingDays;

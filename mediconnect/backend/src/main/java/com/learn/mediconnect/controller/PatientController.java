@@ -3,10 +3,13 @@ package com.learn.mediconnect.controller;
 import com.learn.mediconnect.dto.PatientDTO;
 import com.learn.mediconnect.entity.Patient;
 import com.learn.mediconnect.service.PatientService;
+import com.learn.mediconnect.validation.CreateValidation;
+import com.learn.mediconnect.validation.UpdateValidation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +28,7 @@ public class PatientController {
     }
 
     @PostMapping
-    public ResponseEntity<PatientDTO> createPatient(@Valid @RequestBody PatientDTO patientDTO) {
+    public ResponseEntity<PatientDTO> createPatient(@Validated(CreateValidation.class) @RequestBody PatientDTO patientDTO) {
         Patient patient = convertToEntity(patientDTO);
         Patient createdPatient = patientService.createPatient(patient);
         PatientDTO responseDTO = convertToDTO(createdPatient);
@@ -49,7 +52,7 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PatientDTO> updatePatient(@PathVariable Long id, @Valid @RequestBody PatientDTO patientDTO) {
+    public ResponseEntity<PatientDTO> updatePatient(@PathVariable Long id, @Validated(UpdateValidation.class) @RequestBody PatientDTO patientDTO) {
         Patient patient = convertToEntity(patientDTO);
         Patient updatedPatient = patientService.updatePatient(id, patient);
         PatientDTO responseDTO = convertToDTO(updatedPatient);
