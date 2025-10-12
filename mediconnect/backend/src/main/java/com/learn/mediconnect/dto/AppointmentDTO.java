@@ -5,14 +5,17 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
 public class AppointmentDTO {
+    
     private Long id;
     
     @NotNull(message = "Doctor ID is required", groups = CreateValidation.class)
     private Long doctorId;
+
     private String doctorName; 
     
     @NotNull(message = "Patient ID is required", groups = CreateValidation.class)
     private Long patientId;
+
     private String patientName;
     
     private LocalDate bookingDate; // Set automatically
@@ -21,7 +24,9 @@ public class AppointmentDTO {
     private LocalDate visitingDate;
     
     private Integer visitingSerialNumber; // Set automatically
+
     private String status; // SCHEDULED, COMPLETED, CANCELED
+
     private String problemDescription;
 
     // Constructors

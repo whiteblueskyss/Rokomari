@@ -3,6 +3,7 @@ package com.learn.mediconnect.dto;
 import jakarta.validation.constraints.*;
 
 public class DoctorDTO {
+
     private Long id;
     
     @NotBlank(message = "Doctor name is required")
@@ -25,6 +26,7 @@ public class DoctorDTO {
     private String specializations;
     
     private String visitingDays;
+    
     private String pic;
 
     // Constructors

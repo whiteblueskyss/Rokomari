@@ -6,27 +6,38 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class PrescriptionDTO {
+
     private Long id;
+
     private LocalDate prescriptionDate; // Set automatically
     
     @NotNull(message = "Patient ID is required", groups = CreateValidation.class)
     private Long patientId;
+
     private String patientName; // For read operations
     
     @NotNull(message = "Doctor ID is required", groups = CreateValidation.class)
     private Long doctorId;
+
     private String doctorName; // For read operations
     
     @NotBlank(message = "Problem description is required")
     private String problem;
     
     private List<String> tests;
+
     private List<String> tablets;
+    
     private List<String> capsules;
+    
     private List<String> vaccines;
+    
     private String advice;
+    
     private String other;
+    
     private LocalDate followUpDate;
+    
     private String status; // ACTIVE, COMPLETED, EXPIRED, CANCELED
 
     // Constructors

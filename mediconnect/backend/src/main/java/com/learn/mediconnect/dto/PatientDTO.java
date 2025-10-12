@@ -3,6 +3,7 @@ package com.learn.mediconnect.dto;
 import jakarta.validation.constraints.*;
 
 public class PatientDTO {
+    
     private Long id;
     
     @NotBlank(message = "Patient name is required")
@@ -21,8 +22,11 @@ public class PatientDTO {
     private String password;
     
     private String pic;
+
     private Integer age;
+    
     private String gender;
+    
     private String address;
 
     // Constructors
