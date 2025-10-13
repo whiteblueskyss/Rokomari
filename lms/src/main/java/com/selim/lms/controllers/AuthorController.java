@@ -23,9 +23,9 @@ public class AuthorController {
 
     private final AuthorService authorService;
     
-    @Autowired
-    private AuthUtil authUtil;
+    private final AuthUtil authUtil;
 
+    @Autowired
     public AuthorController(AuthorService authorService) {
         this.authorService = authorService;
     }

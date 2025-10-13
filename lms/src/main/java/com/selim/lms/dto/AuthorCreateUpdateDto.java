@@ -40,5 +40,6 @@ public class AuthorCreateUpdateDto {
     }
 
     public String getName() { return name; }
+    
     public void setName(String name) { this.name = name != null ? name.trim() : null; }
 }
