@@ -27,9 +27,10 @@ public class CookieAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, 
                                   FilterChain filterChain) throws ServletException, IOException {
         
-        // Skip authentication for auth endpoints
+        // Skip authentication for auth endpoints (except validate-session)
         String requestURI = request.getRequestURI();
-        if (requestURI.startsWith("/api/auth/") || requestURI.startsWith("/api/patients/register")) {
+        if ((requestURI.startsWith("/api/auth/") && !requestURI.equals("/api/auth/validate-session")) 
+            || requestURI.startsWith("/api/patients/register")) {
             filterChain.doFilter(request, response);
             return;
         }

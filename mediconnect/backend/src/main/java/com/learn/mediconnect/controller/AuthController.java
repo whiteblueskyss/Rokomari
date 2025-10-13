@@ -7,11 +7,15 @@ import com.learn.mediconnect.service.AuthService;
 import com.learn.mediconnect.entity.Doctor;
 import com.learn.mediconnect.entity.Patient;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -151,4 +155,28 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
     }
+
+    @GetMapping("/validate-session")
+    public ResponseEntity<LoginResponse> validateSession(HttpServletRequest request) {
+        try {
+            // Get user from SecurityContext (set by CookieAuthenticationFilter)
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            
+            if (authentication != null && authentication.isAuthenticated() && 
+                !(authentication instanceof AnonymousAuthenticationToken)) {
+                
+                String username = authentication.getName();
+                String fullRole = authentication.getAuthorities().iterator().next().getAuthority();
+                // Extract userType from "ROLE_ADMIN" -> "ADMIN"
+                String userType = fullRole.startsWith("ROLE_") ? fullRole.substring(5) : fullRole;
+                
+                return ResponseEntity.ok(new LoginResponse(true, "Session valid", username, userType));
+            }
+            
+            return ResponseEntity.ok(new LoginResponse(false, "No valid session", null, null));
+        } catch (Exception e) {
+            return ResponseEntity.ok(new LoginResponse(false, "Session validation failed", null, null));
+        }
+    }
+
 }
