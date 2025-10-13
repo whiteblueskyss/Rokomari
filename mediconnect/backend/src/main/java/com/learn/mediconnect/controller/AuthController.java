@@ -111,7 +111,7 @@ public class AuthController {
             sessionCookie.setMaxAge(3600); 
             response.addCookie(sessionCookie);
 
-            LoginResponse successResponse = LoginResponse.success("PATIENT", username);
+            LoginResponse successResponse = LoginResponse.success("PATIENT", username, patient.getId());
             return ResponseEntity.ok(successResponse);
 
         } catch (Exception e) {
@@ -170,7 +170,21 @@ public class AuthController {
                 // Extract userType from "ROLE_ADMIN" -> "ADMIN"
                 String userType = fullRole.startsWith("ROLE_") ? fullRole.substring(5) : fullRole;
                 
-                return ResponseEntity.ok(new LoginResponse(true, "Session valid", username, userType));
+                // Get user ID based on user type
+                Long userId = null;
+                if ("PATIENT".equals(userType)) {
+                    Patient patient = authService.getPatientByUsername(username);
+                    if (patient != null) {
+                        userId = patient.getId();
+                    }
+                } else if ("DOCTOR".equals(userType)) {
+                    Doctor doctor = authService.getDoctorByUsername(username);
+                    if (doctor != null) {
+                        userId = doctor.getId();
+                    }
+                }
+                
+                return ResponseEntity.ok(new LoginResponse(true, "Session valid", userType, username, userId));
             }
             
             return ResponseEntity.ok(new LoginResponse(false, "No valid session", null, null));
